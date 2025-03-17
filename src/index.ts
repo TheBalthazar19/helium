@@ -3,8 +3,6 @@ import { Hono } from "hono";
 
 const app = new Hono();
 
-serve(app);
-
 app.get("/generate", (context) => {
   return context.json(
     {
@@ -16,7 +14,6 @@ app.get("/generate", (context) => {
 
 app.get("/current-time", (context) => {
   const date = new Date();
-
   return context.json(
     {
       currentTime: date.toLocaleString(),
@@ -74,7 +71,9 @@ app.get("/numbers", (context) => {
   );
 });
 
+serve({
+  fetch: app.fetch,
+  port: 3000, 
+});
 
-
-
-
+console.log("Server is running on http://localhost:3000");
